@@ -15,5 +15,4 @@ export class PostService {
   getAllPosts():Observable<Post[]>{
     return this.http.get<Post[]>("https://jsonplaceholder.typicode.com/posts");
   }
-
 }

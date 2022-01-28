@@ -9,8 +9,9 @@ import { PostService } from 'src/app/services/post.service';
   styleUrls: ['./post.component.css']
 })
 export class PostComponent implements OnInit {
-
-  posts?:Post[];
+  p: number = 1;
+  totalPages?:number;
+  posts=[] as Post[] ;
 
   constructor(private postService:PostService) { }
 
@@ -18,14 +19,18 @@ export class PostComponent implements OnInit {
     this.getAllPosts();
   }
 
-
   getAllPosts(){
-    this.postService.getAllPosts().subscribe({
-      next:(data)=>{
-        this.posts = data;
-        console.log(data);
-      },
-      error:(e) => console.error(e)
-    });  
-  }
+    this.postService.getAllPosts().subscribe(
+      {
+        next:(data)=>{
+          this.posts=data;
+          console.log(data);
+        },
+        error:(e)=>{
+          console.error(e);
+        }
+      }
+    );
+    this.totalPages = this.posts?.length;
+}
 }
